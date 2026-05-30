@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | SUCCESS COACHING CENTRE</title>
+    <!-- CSS पाथ सुनिश्चित करें -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+    <!-- Sidebar: अब यह glass-sidebar स्टाइल में है -->
     <div class="sidebar">
-        <h2>SUCCESS COACHING</h2>
+        <div class="logo">SUCCESS COACHING</div>
         <ul>
             <li><a href="dashboard.html">डैशबोर्ड</a></li>
             <li><a href="notes.html">स्टडी नोट्स</a></li>
@@ -19,39 +21,42 @@
         </ul>
     </div>
 
-    <main class="content">
-        <header>
-            <h1>नमस्ते, <span id="student-name">विद्यार्थी</span>!</h1>
-            <p>आपकी प्रगति का विवरण यहाँ है:</p>
+    <!-- Main Content: यहाँ हमने glass-card और page-fade का उपयोग किया है -->
+    <main class="content page-fade">
+        <header style="margin-bottom: 30px;">
+            <h1 class="glow-text">नमस्ते, <span id="student-name">विद्यार्थी</span>!</h1>
+            <p style="opacity: 0.8;">आपकी प्रगति का विवरण यहाँ है:</p>
         </header>
 
-        <section class="stats-grid">
-            <div class="card">
+        <!-- Stats Grid: पुरानी क्लास सुरक्षित है, स्टाइल अपडेट हो गया है -->
+        <section class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+            <div class="glass-card">
                 <h3>औसत स्कोर</h3>
-                <p id="avg-score">0%</p>
+                <p id="avg-score" style="font-size: 1.5rem; color: var(--neon-blue);">0%</p>
             </div>
-            <div class="card">
+            <div class="glass-card">
                 <h3>कुल टेस्ट</h3>
-                <p id="total-tests">0</p>
+                <p id="total-tests" style="font-size: 1.5rem; color: var(--neon-purple);">0</p>
             </div>
-            <div class="card">
+            <div class="glass-card">
                 <h3>उपस्थिति</h3>
-                <p id="attendance">0%</p>
+                <p id="attendance" style="font-size: 1.5rem; color: var(--neon-blue);">0%</p>
             </div>
         </section>
 
-        <section class="recent-activity">
+        <!-- Recent Activity: ग्लास स्टाइल कार्ड -->
+        <section class="recent-activity glass-card" style="margin-top: 30px;">
             <h3>हालिया गतिविधियाँ</h3>
-            <ul id="activity-list">
+            <ul id="activity-list" style="margin-top: 15px; padding-left: 20px;">
                 <li>नया टेस्ट उपलब्ध: NVS गणित</li>
                 <li>आपने 'विज्ञान' टेस्ट पूरा किया</li>
             </ul>
         </section>
     </main>
 
+    <!-- Scripts को न छेड़ें, यह आपके फंक्शनल लॉजिक को चलाएंगे -->
     <script type="module" src="js/app.js"></script>
     <script type="module">
-        // बेसिक रेंडरिंग लॉजिक
         import { auth } from './js/firebase-config.js';
         import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
@@ -67,4 +72,3 @@
     </script>
 </body>
 </html>
-
