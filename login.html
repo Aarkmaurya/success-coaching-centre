@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>लॉगिन | SUCCESS COACHING CENTRE</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/firebase-config.js"></script>
+</head>
+<body>
+
+    <div class="auth-container">
+        <h2>SUCCESS COACHING CENTRE</h2>
+        <p>अपनी कोचिंग यात्रा शुरू करें</p>
+
+        <div id="login-form">
+            <input type="tel" id="phone-number" placeholder="+91 मोबाईल नंबर" required>
+            <div id="recaptcha-container"></div>
+            <button id="send-otp-btn">OTP भेजें</button>
+        </div>
+
+        <div id="otp-form" style="display:none;">
+            <input type="text" id="otp-code" placeholder="6 अंकों का OTP डालें" maxlength="6">
+            <button id="verify-otp-btn">वेरिफाई करें</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { auth } from './js/firebase-config.js';
+        import { RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+        // UI Elements
+        const phoneInput = document.getElementById('phone-number');
+        const sendOtpBtn = document.getElementById('send-otp-btn');
+        const otpForm = document.getElementById('otp-form');
+        const verifyOtpBtn = document.getElementById('verify-otp-btn');
+
+        // Setup Recaptcha
+        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+            'size': 'invisible'
+        });
+
+        sendOtpBtn.addEventListener('click', () => {
+            const phoneNumber = phoneInput.value;
+            signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
+                .then((confirmationResult) => {
+                    window.confirmationResult = confirmationResult;
+                    alert("OTP भेज दिया गया है!");
+                    document.getElementById('login-form').style.display = 'none';
+                    otpForm.style.display = 'block';
+                }).catch((error) => {
+                    alert("एरर: " + error.message);
+                });
+        });
+
+        verifyOtpBtn.addEventListener('click', () => {
+            const code = document.getElementById('otp-code').value;
+            window.confirmationResult.confirm(code).then((result) => {
+                alert("सफलतापूर्वक लॉगिन हो गए!");
+                window.location.href = "dashboard.html"; // लॉगिन के बाद डैशबोर्ड पर भेजें
+            }).catch((error) => {
+                alert("गलत OTP!");
+            });
+        });
+    </script>
+</body>
+</html>
+
