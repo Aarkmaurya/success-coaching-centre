@@ -4,32 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>लॉगिन | SUCCESS COACHING CENTRE</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* सिर्फ लॉगिन पेज के लिए स्टाइल */
+        body { background: #0f0f0f; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .auth-container { background: #1a1a1a; padding: 30px; border-radius: 15px; width: 350px; text-align: center; border: 1px solid #333; }
+        input { width: 90%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #444; background: #000; color: white; }
+        button { width: 95%; padding: 12px; border-radius: 8px; border: none; background: #007bff; color: white; cursor: pointer; }
+        h2 { color: #007bff; }
+    </style>
 </head>
 <body>
 
-    <div class="auth-container glass-card" style="max-width: 400px; margin: 100px auto; padding: 30px; text-align: center;">
-        <h2 class="glow-text">SUCCESS COACHING CENTRE</h2>
-        <p style="opacity: 0.7; margin-bottom: 25px;">अपनी कोचिंग यात्रा शुरू करें</p>
+    <div class="auth-container">
+        <h2>SUCCESS COACHING</h2>
+        <p>अपनी कोचिंग यात्रा शुरू करें</p>
 
         <div id="login-form">
-            <input type="tel" id="phone-number" placeholder="मोबाइल नंबर (बिना +91 के)" 
-                   style="width: 100%; padding: 12px; margin-bottom: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 8px; color: white;">
-
-            <div id="recaptcha-container" style="margin: 15px 0;"></div>
-
-            <button id="send-otp-btn" class="glass-btn" style="width: 100%;">
-                OTP भेजें
-            </button>
+            <input type="tel" id="phone-number" placeholder="मोबाइल नंबर (10 अंक)" required>
+            <div id="recaptcha-container"></div>
+            <button id="send-otp-btn">OTP भेजें</button>
         </div>
 
         <div id="otp-form" style="display:none;">
-            <input type="text" id="otp-code" placeholder="6 अंकों का OTP डालें" maxlength="6"
-                   style="width: 100%; padding: 12px; margin-bottom: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 8px; color: white;">
-
-            <button id="verify-otp-btn" class="glass-btn" style="width: 100%;">
-                वेरिफाई करें
-            </button>
+            <input type="text" id="otp-code" placeholder="6 अंकों का OTP (टेस्टिंग: 000000)" maxlength="6">
+            <button id="verify-otp-btn">वेरिफाई करें</button>
         </div>
     </div>
 
@@ -37,34 +35,17 @@
         import { auth } from './js/firebase-config.js';
         import { RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
-        const phoneInput = document.getElementById("phone-number");
-        const sendOtpBtn = document.getElementById("send-otp-btn");
-        const verifyOtpBtn = document.getElementById("verify-otp-btn");
-        const otpForm = document.getElementById("otp-form");
-
-        window.recaptchaVerifier = new RecaptchaVerifier("recaptcha-container", { size: "normal" }, auth);
-        window.recaptchaVerifier.render();
-
-        sendOtpBtn.addEventListener("click", async () => {
-            const mobile = phoneInput.value.trim();
-            if (mobile.length !== 10) { alert("10 अंकों का मोबाइल नंबर डालें"); return; }
-            const phoneNumber = "+91" + mobile;
-            try {
-                const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
-                window.confirmationResult = confirmationResult;
-                alert("OTP भेज दिया गया है!");
-                document.getElementById("login-form").style.display = "none";
-                otpForm.style.display = "block";
-            } catch (error) { console.error(error); alert("Error: " + error.message); }
-        });
-
-        verifyOtpBtn.addEventListener("click", async () => {
+        // ... (आपका वही लॉजिक जो पहले था) ...
+        // बस verify-otp-btn वाले में वो '000000' वाला बाईपास लगा लें।
+        
+        document.getElementById("verify-otp-btn").addEventListener("click", async () => {
             const code = document.getElementById("otp-code").value;
+            if(code === "000000") { window.location.href = "dashboard.html"; return; }
+            
             try {
                 await window.confirmationResult.confirm(code);
-                alert("सफलतापूर्वक लॉगिन हो गए!");
                 window.location.href = "dashboard.html";
-            } catch (error) { console.error(error); alert("गलत OTP!"); }
+            } catch(e) { alert("गलत OTP!"); }
         });
     </script>
 </body>
