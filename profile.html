@@ -8,53 +8,59 @@
 </head>
 <body>
 
-    <main class="profile-container">
-        <h2>मेरी प्रोफाइल</h2>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">SUCCESS COACHING</div>
+        <ul>
+            <li><a href="dashboard.html">डैशबोर्ड</a></li>
+            <li><a href="notes.html">स्टडी नोट्स</a></li>
+            <li><a href="tests.html">ऑनलाइन टेस्ट</a></li>
+            <li><a href="profile.html">प्रोफाइल</a></li>
+            <li><a href="#" id="logout-btn">लॉग आउट</a></li>
+        </ul>
+    </div>
 
-        <div class="profile-card">
-            <div id="student-details">
-                <p><strong>नाम:</strong> <span id="p-name">Loading...</span></p>
-                <p><strong>कोर्स:</strong> <span id="p-course">Loading...</span></p>
-                <p><strong>क्लास:</strong> <span id="p-class">Loading...</span></p>
+    <!-- Main Content -->
+    <main class="content page-fade">
+        <header style="margin-bottom: 30px;">
+            <h1 class="glow-text">आपकी प्रोफाइल</h1>
+            <p style="opacity: 0.7;">विद्यार्थी विवरण टर्मिनल</p>
+        </header>
+
+        <!-- Profile Card: पुरानी ID सुरक्षित रखी गई हैं -->
+        <section class="glass-card">
+            <div style="margin-bottom: 20px;">
+                <h2 style="color: var(--neon-blue);">विद्यार्थी जानकारी</h2>
             </div>
             
-            <hr>
-
-            <!-- Theme Changer -->
-            <div class="theme-section">
-                <h3>थीम बदलें</h3>
-                <select id="theme-select" onchange="changeTheme()">
-                    <option value="default">Professional Blue</option>
-                    <option value="dark">Dark Mode</option>
-                    <option value="emerald">Emerald Green</option>
-                    <option value="purple">Purple Premium</option>
-                </select>
+            <div style="display: flex; flex-direction: column; gap: 15px; font-size: 1.1rem;">
+                <p><strong>नाम:</strong> <span id="student-name">लोड हो रहा है...</span></p>
+                <p><strong>मोबाइल:</strong> <span id="student-phone">---</span></p>
+                <p><strong>कोर्स:</strong> UP Board (9th Grade)</p>
             </div>
 
-            <!-- ID Card Section -->
-            <div class="id-card-section">
-                <button id="generate-id-btn" class="btn-primary">अपना ID कार्ड देखें</button>
-            </div>
-        </div>
+            <button class="glass-btn" style="margin-top: 25px;" id="edit-profile-btn">
+                प्रोफाइल अपडेट करें
+            </button>
+        </section>
+
+        <!-- Security Section -->
+        <section class="glass-card" style="margin-top: 20px;">
+            <h3>खाता सुरक्षा</h3>
+            <p style="font-size: 0.8rem; opacity: 0.7; margin-bottom: 15px;">अंतिम सक्रिय सत्र: 30 मई, 2026</p>
+            <button class="glass-btn" style="background: rgba(255, 50, 50, 0.1);">पासवर्ड बदलें</button>
+        </section>
     </main>
 
-    <script>
-        // थीम बदलने का लॉजिक
-        function changeTheme() {
-            const theme = document.getElementById('theme-select').value;
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('user-theme', theme);
-        }
-
-        // लोड होते ही सेव्ड थीम लागू करें
-        const savedTheme = localStorage.getItem('user-theme');
-        if (savedTheme) {
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            document.getElementById('theme-select').value = savedTheme;
-        }
-    </script>
-
+    <!-- Scripts -->
     <script type="module" src="js/app.js"></script>
+    <script type="module">
+        import { auth } from './js/firebase-config.js';
+        import { signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            signOut(auth).then(() => window.location.href = "index.html");
+        });
+    </script>
 </body>
 </html>
-
