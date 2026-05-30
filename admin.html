@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>एडमिन पैनल | SUCCESS COACHING CENTRE</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>एडमिन पैनल</h2>
+        <ul>
+            <li><a href="admin.html">डैशबोर्ड</a></li>
+            <li><a href="#students">विद्यार्थी प्रबंधन</a></li>
+            <li><a href="#tests">टेस्ट प्रबंधन</a></li>
+            <li><a href="#attendance">उपस्थिति</a></li>
+            <li><a href="#announcements">घोषणाएं</a></li>
+        </ul>
+    </div>
+
+    <main class="content">
+        <h1>व्यवस्थापन केंद्र</h1>
+
+        <section class="stats-grid">
+            <div class="card"><h3>कुल छात्र</h3><p id="total-students">0</p></div>
+            <div class="card"><h3>सक्रिय टेस्ट</h3><p id="active-tests">0</p></div>
+        </section>
+
+        <section id="tests" class="admin-section">
+            <h3>टेस्ट मैनेज करें</h3>
+            <button class="btn-primary" onclick="openTestModal()">नया टेस्ट बनाएं</button>
+            <table id="admin-test-table">
+                <thead>
+                    <tr><th>टेस्ट नाम</th><th>स्थिति</th><th>कार्रवाई</th></tr>
+                </thead>
+                <tbody id="test-list">
+                    </tbody>
+            </table>
+        </section>
+    </main>
+
+    <div id="test-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h3>टेस्ट बनाएं</h3>
+            <input type="text" id="test-name" placeholder="टेस्ट का नाम">
+            <input type="number" id="test-duration" placeholder="समय (मिनट में)">
+            <label><input type="checkbox" id="neg-marking"> नेगेटिव मार्किंग</label>
+            <button onclick="saveTest()">टेस्ट सेव करें</button>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+    <script>
+        function openTestModal() {
+            document.getElementById('test-modal').style.display = 'block';
+        }
+        
+        // एडमिन चेक का लॉजिक app.js में जोड़ें
+    </script>
+</body>
+</html>
+
