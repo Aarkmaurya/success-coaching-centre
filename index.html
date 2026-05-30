@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUCCESS COACHING CENTRE | श्रेष्ठ शिक्षा, सुनहरे भविष्य की ओर</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">SUCCESS COACHING CENTRE</div>
+            <ul>
+                <li><a href="index.html">होम</a></li>
+                <li><a href="login.html" class="btn-login">लॉगिन / रजिस्टर</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>विद्यार्थियों के सपनों को दें नई उड़ान</h1>
+        <p>हमारे साथ जुड़ें और अपनी तैयारी को बनाएं और भी बेहतर।</p>
+        <a href="login.html" class="btn-cta">अभी शुरुआत करें</a>
+    </section>
+
+    <section class="features">
+        <div class="card">
+            <h3>ऑनलाइन टेस्ट</h3>
+            <p>समयबद्ध और सटीक ऑनलाइन परीक्षा प्रणाली।</p>
+        </div>
+        <div class="card">
+            <h3>नोट्स और सामग्री</h3>
+            <p>PDF नोट्स और स्टडी मटेरियल कहीं भी पढ़ें।</p>
+        </div>
+        <div class="card">
+            <h3>लीडरबोर्ड</h3>
+            <p>अपनी रैंकिंग देखें और सुधारें।</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 SUCCESS COACHING CENTRE</p>
+        <p>Designed & Developed by <span id="dev-link" style="cursor:pointer; color:var(--primary-color);">Aark Maurya</span></p>
+    </footer>
+
+    <div id="dev-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h3>Aark Maurya</h3>
+            <p>Role: IT Student & Developer</p>
+            <p>Passionate about web development, technology and educational solutions.</p>
+            <button onclick="document.getElementById('dev-modal').style.display='none'">बंद करें</button>
+        </div>
+    </div>
+
+    <script>
+        // Footer Modal Logic
+        document.getElementById('dev-link').onclick = function() {
+            document.getElementById('dev-modal').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+
