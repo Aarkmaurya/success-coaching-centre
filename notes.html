@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>स्टडी नोट्स | SUCCESS COACHING CENTRE</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>SUCCESS COACHING</h2>
+        <ul>
+            <li><a href="dashboard.html">डैशबोर्ड</a></li>
+            <li><a href="notes.html" class="active">स्टडी नोट्स</a></li>
+            <li><a href="tests.html">ऑनलाइन टेस्ट</a></li>
+            <li><a href="profile.html">प्रोफाइल</a></li>
+        </ul>
+    </div>
+
+    <main class="content">
+        <header>
+            <h1>स्टडी मटेरियल</h1>
+            <p>अपनी कक्षा और कोर्स के अनुसार नोट्स चुनें:</p>
+        </header>
+
+        <section class="filter-section">
+            <select id="course-filter">
+                <option value="all">सभी कोर्स</option>
+                <option value="nvs">NVS</option>
+                <option value="sainik">Sainik School</option>
+                <option value="chs">CHS</option>
+            </select>
+        </section>
+
+        <section class="notes-grid" id="notes-container">
+            <div class="note-card">
+                <h3>गणित - अध्याय 1</h3>
+                <p>क्लास: 6 | कोर्स: NVS</p>
+                <div class="actions">
+                    <a href="#" class="btn-view">ऑनलाइन देखें</a>
+                    <a href="#" class="btn-download" download>डाउनलोड PDF</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="js/app.js"></script>
+    <script type="module">
+        // बेसिक फिल्टर लॉजिक
+        const filter = document.getElementById('course-filter');
+        filter.addEventListener('change', (e) => {
+            const selectedCourse = e.target.value;
+            console.log("फिल्टरिंग कोर्स: ", selectedCourse);
+            // यहाँ Firestore से डेटा री-फेच करने का लॉजिक आएगा
+        });
+    </script>
+</body>
+</html>
+
