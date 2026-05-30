@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>रिजल्ट | SUCCESS COACHING CENTRE</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <main class="result-container">
+        <header>
+            <h1>टेस्ट परिणाम</h1>
+            <p>आपका प्रदर्शन विवरण:</p>
+        </header>
+
+        <section class="score-card">
+            <div class="main-score">
+                <h2>प्राप्तांक: <span id="score">85</span>/100</h2>
+                <p>प्रतिशत: <span id="percentage">85%</span></p>
+                <p>रैंक: <span id="rank">#05</span></p>
+            </div>
+        </section>
+
+        <section class="charts-section">
+            <div class="chart-box">
+                <canvas id="accuracyChart"></canvas>
+            </div>
+        </section>
+
+        <div class="actions">
+            <button onclick="window.location.href='dashboard.html'" class="btn-primary">वापस डैशबोर्ड पर जाएँ</button>
+        </div>
+    </main>
+
+    <script>
+        // Chart.js का उपयोग करके Pie Chart रेंडर करना
+        const ctx = document.getElementById('accuracyChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['सही', 'गलत', 'अनुत्तरित'],
+                datasets: [{
+                    data: [85, 10, 5],
+                    backgroundColor: ['#059669', '#dc2626', '#d1d5db']
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
+
