@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>प्रोफाइल | SUCCESS COACHING CENTRE</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <main class="profile-container">
+        <h2>मेरी प्रोफाइल</h2>
+
+        <div class="profile-card">
+            <div id="student-details">
+                <p><strong>नाम:</strong> <span id="p-name">Loading...</span></p>
+                <p><strong>कोर्स:</strong> <span id="p-course">Loading...</span></p>
+                <p><strong>क्लास:</strong> <span id="p-class">Loading...</span></p>
+            </div>
+            
+            <hr>
+
+            <!-- Theme Changer -->
+            <div class="theme-section">
+                <h3>थीम बदलें</h3>
+                <select id="theme-select" onchange="changeTheme()">
+                    <option value="default">Professional Blue</option>
+                    <option value="dark">Dark Mode</option>
+                    <option value="emerald">Emerald Green</option>
+                    <option value="purple">Purple Premium</option>
+                </select>
+            </div>
+
+            <!-- ID Card Section -->
+            <div class="id-card-section">
+                <button id="generate-id-btn" class="btn-primary">अपना ID कार्ड देखें</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // थीम बदलने का लॉजिक
+        function changeTheme() {
+            const theme = document.getElementById('theme-select').value;
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('user-theme', theme);
+        }
+
+        // लोड होते ही सेव्ड थीम लागू करें
+        const savedTheme = localStorage.getItem('user-theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('theme-select').value = savedTheme;
+        }
+    </script>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
+
