@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>लीडरबोर्ड | SUCCESS COACHING CENTRE</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>SUCCESS COACHING</h2>
+        <ul>
+            <li><a href="dashboard.html">डैशबोर्ड</a></li>
+            <li><a href="leaderboard.html" class="active">लीडरबोर्ड</a></li>
+            <li><a href="tests.html">ऑनलाइन टेस्ट</a></li>
+        </ul>
+    </div>
+
+    <main class="content">
+        <header>
+            <h1>टॉप विद्यार्थी (Leaderboard)</h1>
+            <p>अपनी रैंकिंग देखें और बेहतर प्रदर्शन करें!</p>
+        </header>
+
+        <section class="filter-section">
+            <button onclick="updateRank('weekly')" class="btn-filter">साप्ताहिक</button>
+            <button onclick="updateRank('monthly')" class="btn-filter">मासिक</button>
+        </section>
+
+        <section class="leaderboard-card">
+            <table id="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>रैंक</th>
+                        <th>नाम</th>
+                        <th>अंक (Score)</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-body">
+                    <tr>
+                        <td>1</td>
+                        <td>राहुल कुमार</td>
+                        <td>495/500</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>प्रिया शर्मा</td>
+                        <td>480/500</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script type="module" src="js/app.js"></script>
+    <script>
+        function updateRank(type) {
+            console.log("Loading " + type + " ranking...");
+            // यहाँ Firestore से डेटा फेच करके टेबल अपडेट करने का लॉजिक आएगा
+        }
+    </script>
+</body>
+</html>
+
