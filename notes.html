@@ -4,28 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>स्टडी नोट्स | SUCCESS COACHING CENTRE</title>
+    <!-- CSS पाथ सुनिश्चित करें -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <div class="sidebar">
-        <h2>SUCCESS COACHING</h2>
+        <div class="logo">SUCCESS COACHING</div>
         <ul>
             <li><a href="dashboard.html">डैशबोर्ड</a></li>
-            <li><a href="notes.html" class="active">स्टडी नोट्स</a></li>
+            <li><a href="notes.html">स्टडी नोट्स</a></li>
             <li><a href="tests.html">ऑनलाइन टेस्ट</a></li>
             <li><a href="profile.html">प्रोफाइल</a></li>
         </ul>
     </div>
 
-    <main class="content">
-        <header>
-            <h1>स्टडी मटेरियल</h1>
-            <p>अपनी कक्षा और कोर्स के अनुसार नोट्स चुनें:</p>
+    <main class="content page-fade">
+        <header style="margin-bottom: 30px;">
+            <h1 class="glow-text">स्टडी मटेरियल</h1>
+            <p style="opacity: 0.7;">अपनी कक्षा और कोर्स के अनुसार नोट्स चुनें:</p>
         </header>
 
-        <section class="filter-section">
-            <select id="course-filter">
+        <section class="filter-section glass-card" style="margin-bottom: 20px; padding: 15px;">
+            <select id="course-filter" style="background: rgba(0,0,0,0.3); color: white; padding: 10px; border: 1px solid var(--neon-purple); border-radius: 8px; width: 100%;">
                 <option value="all">सभी कोर्स</option>
                 <option value="nvs">NVS</option>
                 <option value="sainik">Sainik School</option>
@@ -34,12 +35,13 @@
         </section>
 
         <section class="notes-grid" id="notes-container">
-            <div class="note-card">
+            <!-- यहाँ note-card को glass-card में बदल दिया है -->
+            <div class="note-card glass-card">
                 <h3>गणित - अध्याय 1</h3>
-                <p>क्लास: 6 | कोर्स: NVS</p>
-                <div class="actions">
-                    <a href="#" class="btn-view">ऑनलाइन देखें</a>
-                    <a href="#" class="btn-download" download>डाउनलोड PDF</a>
+                <p style="opacity: 0.8; margin-bottom: 15px;">क्लास: 6 | कोर्स: NVS</p>
+                <div class="actions" style="display: flex; gap: 10px;">
+                    <a href="#" class="glass-btn">ऑनलाइन देखें</a>
+                    <a href="#" class="glass-btn" download>डाउनलोड PDF</a>
                 </div>
             </div>
         </section>
@@ -47,14 +49,11 @@
 
     <script type="module" src="js/app.js"></script>
     <script type="module">
-        // बेसिक फिल्टर लॉजिक
         const filter = document.getElementById('course-filter');
         filter.addEventListener('change', (e) => {
             const selectedCourse = e.target.value;
             console.log("फिल्टरिंग कोर्स: ", selectedCourse);
-            // यहाँ Firestore से डेटा री-फेच करने का लॉजिक आएगा
         });
     </script>
 </body>
 </html>
-
