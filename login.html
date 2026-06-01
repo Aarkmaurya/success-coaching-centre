@@ -5,29 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>लॉगिन | SUCCESS COACHING CENTRE</title>
     <style>
-        /* सिर्फ लॉगिन पेज के लिए स्टाइल */
-        body { background: #0f0f0f; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .auth-container { background: #1a1a1a; padding: 30px; border-radius: 15px; width: 350px; text-align: center; border: 1px solid #333; }
-        input { width: 90%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #444; background: #000; color: white; }
-        button { width: 95%; padding: 12px; border-radius: 8px; border: none; background: #007bff; color: white; cursor: pointer; }
-        h2 { color: #007bff; }
+        /* Cyberpunk Glass-UI स्टाइल */
+        :root { --neon: #00f2ff; --glass: rgba(255, 255, 255, 0.08); }
+        body { background: #050505; color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        
+        .auth-container {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 25px;
+            width: 320px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+        }
+
+        h2 { color: var(--neon); letter-spacing: 2px; margin-bottom: 20px; }
+        input { 
+            width: 90%; padding: 12px; margin-bottom: 15px; 
+            background: rgba(0,0,0,0.3); border: 1px solid #333; 
+            border-radius: 10px; color: white; outline: none;
+        }
+        
+        button {
+            width: 100%; padding: 12px; border-radius: 10px; border: none;
+            background: var(--neon); color: black; font-weight: bold;
+            cursor: pointer; transition: 0.3s;
+        }
+        button:hover { transform: scale(1.02); box-shadow: 0 0 15px var(--neon); }
     </style>
 </head>
 <body>
 
     <div class="auth-container">
-        <h2>SUCCESS COACHING</h2>
-        <p>अपनी कोचिंग यात्रा शुरू करें</p>
-
+        <h2>AARK PROTOCOL</h2>
+        
         <div id="login-form">
-            <input type="tel" id="phone-number" placeholder="मोबाइल नंबर (10 अंक)" required>
+            <input type="tel" id="phone-number" placeholder="Mobile (10 digits)">
             <div id="recaptcha-container"></div>
-            <button id="send-otp-btn">OTP भेजें</button>
+            <button id="send-otp-btn">REQUEST OTP</button>
         </div>
 
         <div id="otp-form" style="display:none;">
-            <input type="text" id="otp-code" placeholder="6 अंकों का OTP (टेस्टिंग: 000000)" maxlength="6">
-            <button id="verify-otp-btn">वेरिफाई करें</button>
+            <input type="text" id="otp-code" placeholder="Enter OTP" maxlength="6">
+            <button id="verify-otp-btn">AUTHENTICATE</button>
         </div>
     </div>
 
@@ -35,17 +56,31 @@
         import { auth } from './js/firebase-config.js';
         import { RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
-        // ... (आपका वही लॉजिक जो पहले था) ...
-        // बस verify-otp-btn वाले में वो '000000' वाला बाईपास लगा लें।
-        
-        document.getElementById("verify-otp-btn").addEventListener("click", async () => {
+        const phoneInput = document.getElementById("phone-number");
+        const sendOtpBtn = document.getElementById("send-otp-btn");
+        const verifyOtpBtn = document.getElementById("verify-otp-btn");
+        const otpForm = document.getElementById("otp-form");
+
+        window.recaptchaVerifier = new RecaptchaVerifier("recaptcha-container", { size: "normal" }, auth);
+        window.recaptchaVerifier.render();
+
+        sendOtpBtn.addEventListener("click", async () => {
+            const mobile = phoneInput.value.trim();
+            if (mobile.length !== 10) { alert("Invalid Number"); return; }
+            try {
+                const confirmationResult = await signInWithPhoneNumber(auth, "+91" + mobile, window.recaptchaVerifier);
+                window.confirmationResult = confirmationResult;
+                document.getElementById("login-form").style.display = "none";
+                otpForm.style.display = "block";
+            } catch (e) { alert("Error: " + e.message); }
+        });
+
+        verifyOtpBtn.addEventListener("click", async () => {
             const code = document.getElementById("otp-code").value;
-            if(code === "000000") { window.location.href = "dashboard.html"; return; }
-            
             try {
                 await window.confirmationResult.confirm(code);
                 window.location.href = "dashboard.html";
-            } catch(e) { alert("गलत OTP!"); }
+            } catch(e) { alert("Invalid OTP!"); }
         });
     </script>
 </body>
